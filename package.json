@@ -1,0 +1,64 @@
+{
+  "name": "@noxify/jupyter-to-mdx",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build": "pkgroll --clean-dist",
+    "ci:publish": "pnpm build && pnpm publish -r --access public --publish-branch main && pnpm changeset tag",
+    "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add .",
+    "clean": "git clean -xdf .cache node_modules",
+    "cs": "changeset",
+    "deps:update": "pnpm update -i -r -L",
+    "dev": "pkgroll --watch",
+    "format": "prettier --check . --ignore-path ./.gitignore --ignore-path ./.prettierignore",
+    "format:fix": "pnpm format --write",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "pkg-new-release": "npx pkg-pr-new publish",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "./prettier.config.js",
+  "dependencies": {
+    "@jupyterlab/nbformat": "4.3.5",
+    "mdast-util-from-markdown": "2.0.2",
+    "mdast-util-frontmatter": "2.0.1",
+    "mdast-util-mdx": "3.0.0",
+    "mdast-util-to-markdown": "2.1.2",
+    "micromark-extension-frontmatter": "2.0.0",
+    "micromark-extension-mdxjs": "3.0.0",
+    "unist-util-visit": "5.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.28.1",
+    "@eslint/compat": "1.2.7",
+    "@ianvs/prettier-plugin-sort-imports": "4.4.1",
+    "@types/mdast": "4.0.4",
+    "@types/node": "22.13.5",
+    "eslint": "9.21.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-package-json": "0.26.0",
+    "jsonc-eslint-parser": "2.4.0",
+    "pkgroll": "2.11.2",
+    "prettier": "3.5.2",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.25.0",
+    "vitest": "3.0.7"
+  },
+  "packageManager": "pnpm@10.5.2",
+  "engines": {
+    "node": ">=22"
+  }
+}
